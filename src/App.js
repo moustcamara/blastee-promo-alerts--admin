@@ -4,6 +4,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import WidgetList from './components/WidgetList';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
 import * as firebase from 'firebase';
 //var app = firebase.initializeApp({ ... });
 
@@ -33,12 +38,45 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: 'user1'
+      currentUser: 'user1',
+      widgets: []
     }
+  }
+
+  componentDidMount() {
+
+    let userWidgets = [];
+
+    let getWidgets = db.collection('widgets');
+    let widgetQuery = getWidgets.where('ownerId', '==', this.state.currentUser).get()
+    .then(snapshot => {
+      if (snapshot.empty) {
+        console.log('No matching documents.');
+        return;
+      }  
+      snapshot.forEach(doc => {
+        userWidgets.push(doc.data());
+        
+      });
+
+      this.setState({
+          widgets: userWidgets
+        });
+
+      //return this.state.widgets;
+
+    })
+    .catch(err => {
+      console.log('Error getting documents', err);
+    });
+
+ 
+
   }
 
 
   render(){
+
 
       let banana = 'a very nice fruit!';
 
@@ -50,9 +88,7 @@ class App extends Component {
         }
       ];
 
-
-    let userWidgets = [
-
+ let uw = [
         {
           title: 'Spring Sale',   
           ownerId: 'user1',
@@ -78,10 +114,9 @@ class App extends Component {
           widgetType: 'Pop Up',
           creationDate: 'December 20, 2017',
           status: 'not active',
-        }
+        } 
+    ]
 
-
-      ];
 
       let addUser = (firstName, lastName) => {
         let username = [firstName,lastName].join('-').toLowerCase();
@@ -102,7 +137,7 @@ class App extends Component {
 
       let addMultipleWidgets = (widgets) => {
         return(
-          userWidgets.map(singleWidget => {
+          uw.map(singleWidget => {
             db.collection("counters").doc("stats").set({widgets: ++widgetCounter});
             db.collection("widgets").doc('bcpa'.concat(widgetCounter)).set(singleWidget)
           })
@@ -115,10 +150,10 @@ class App extends Component {
           <Header/>
           <div className="main">  
             <button onClick={() => alert(widgetCounter)}>Count data</button>
-            <button onClick={() => addMultipleWidgets(userWidgets)} >Add Sample Widgets</button>      
+            <button onClick={() => addMultipleWidgets(uw)} >Add Sample Widgets</button>      
             <button onClick={() => addUser('Jenna', 'McKenzie')} >Add User</button>
             <button onClick={() => db.collection("users").doc("rob-hueman").delete()} >Delete a user</button>
-            <WidgetList title="Alerts" user={users.find(x => x.id == this.state.currentUser).name} dataSource={userWidgets} />
+            <WidgetList title="Alerts" user={users.find(x => x.id == this.state.currentUser).name} dataSource={this.state.widgets} />
             }
           </div>                 
           <Footer />
