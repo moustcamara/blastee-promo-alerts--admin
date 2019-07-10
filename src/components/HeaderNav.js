@@ -34,22 +34,22 @@ function handleChange(event, newValue) {
 
 let HeaderNav = props => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [v, setValue] = React.useState(0);
 
   return (
     <nav className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs value={v} onChange={handleChange}>
           <Tab label="My Widgets" />
           <Tab label="All Widgets" />
           <Tab label="Help" />
           <Tab label="My Account" />
         </Tabs>
       </AppBar>
-      {value === 0 && <TabContainer>My Widgets</TabContainer>}
-      {value === 1 && <TabContainer>All Widgets</TabContainer>}
-      {value === 2 && <TabContainer>Help</TabContainer>}
-      {value === 3 && <TabContainer>My Account</TabContainer>}
+      {v === 0 && <TabContainer>My Widgets</TabContainer>}
+      {v === 1 && <TabContainer>All Widgets</TabContainer>}
+      {v === 2 && <TabContainer>Help</TabContainer>}
+      {v === 3 && <TabContainer>My Account</TabContainer>}
     </nav>
   );
 };
