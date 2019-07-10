@@ -28,18 +28,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function handleChange(event, newValue) {
+/* function handleChange(event, newValue) {
   setValue(newValue);
-}
+} */
 
 let HeaderNav = props => {
   const classes = useStyles();
-  const [v, setValue] = React.useState(0);
+  //const [v, setValue] = React.useState(0);
 
   return (
     <nav className={classes.root}>
       <AppBar position="static">
-        <Tabs value={v} onChange={handleChange}>
+        <Tabs value={v}>
           <Tab label="My Widgets" />
           <Tab label="All Widgets" />
           <Tab label="Help" />
