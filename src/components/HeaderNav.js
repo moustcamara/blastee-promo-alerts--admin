@@ -39,17 +39,13 @@ let HeaderNav = props => {
   return (
     <nav className={classes.root}>
       <AppBar position="static">
-        <Tabs value={v}>
+        <Tabs>
           <Tab label="My Widgets" />
           <Tab label="All Widgets" />
           <Tab label="Help" />
           <Tab label="My Account" />
         </Tabs>
       </AppBar>
-      {v === 0 && <TabContainer>My Widgets</TabContainer>}
-      {v === 1 && <TabContainer>All Widgets</TabContainer>}
-      {v === 2 && <TabContainer>Help</TabContainer>}
-      {v === 3 && <TabContainer>My Account</TabContainer>}
     </nav>
   );
 };
