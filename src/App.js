@@ -28,7 +28,7 @@ var firebaseConfig = {
 
 // Initialize Firebase
 // Remove comment lines for code below when launching app locally (or in Firebase)
-//firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
 
@@ -141,21 +141,6 @@ class App extends Component {
       <div className="App">
         <Header />
         <div className="main">
-          <button onClick={() => alert(widgetCounter)}>Count data</button>
-          <button onClick={() => addMultipleWidgets(uw)}>
-            Add Sample Widgets
-          </button>
-          <button onClick={() => addUser("Jenna", "McKenzie")}>Add User</button>
-          <button
-            onClick={() =>
-              db
-                .collection("users")
-                .doc("rob-hueman")
-                .delete()
-            }
-          >
-            Delete a user
-          </button>
           <WidgetList
             title="Alerts"
             user={users.find(x => x.id == this.state.currentUser).name}
