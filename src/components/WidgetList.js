@@ -1,44 +1,57 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
-import WidgetListSingle from './WidgetListSingle';
+import WidgetListSingle from "./WidgetListSingle";
 
+import * as firebase from "firebase";
 
 function WidgetList(props) {
+  const useStyles = makeStyles(theme => ({
+    control: {
+      padding: theme.spacing(2)
+    }
+  }));
 
-	const useStyles = makeStyles(theme => ({
-		  control: {
-		    padding: theme.spacing(2),
-		  },
-	}));
+  const [spacing, setSpacing] = React.useState(2);
+  const classes = useStyles();
 
- 	const [spacing, setSpacing] = React.useState(2);
- 	const classes = useStyles();
+  let handleDelete = widgetId => {
+    return db
+      .collection("widgets")
+      .doc(widgetId)
+      .delete()
+      .then(function() {
+        alert("Widget successfully deleted!");
+      })
+      .catch(function(error) {
+        alert("Error deleting widget: ", error);
+      });
+  };
 
-	return (
-		<React.Fragment>
-			<p><strong>User:</strong> {props.user}</p>
-			<h3>{props.title}</h3>
+  return (
+    <React.Fragment>
+      <p>
+        <strong>User:</strong> {props.user}
+      </p>
+      <h3>{props.title}</h3>
 
-			<Grid xs={12}>
-				<Grid container justify="center" spacing={spacing}>
-					{props.dataSource.map((x,i) => 
-						<WidgetListSingle 
-							key={'_' + i}
-							title={x.title}
-							status={x.status}
-							widgetType={x.widgetType}
-							creationDate={x.creationDate} 
-						/>
-					)}
-				</Grid>
-			</Grid>
-
-		</React.Fragment>
-	)
-
+      <Grid xs={12}>
+        <Grid container justify="center" spacing={spacing}>
+          {props.dataSource.map((x, i) => (
+            <WidgetListSingle
+              key={x.id}
+              title={x.title}
+              status={x.status}
+              widgetType={x.widgetType}
+              creationDate={x.creationDate}
+            />
+          ))}
+        </Grid>
+      </Grid>
+    </React.Fragment>
+  );
 }
 
 export default WidgetList;
