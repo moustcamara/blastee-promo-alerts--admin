@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import "./App.css";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import WidgetList from "./components/WidgetList";
+
+import Home from "./pages/home";
+import EditWidget from "./pages/edit-widget";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -10,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 import * as firebase from "firebase";
+
 //var app = firebase.initializeApp({ ... });
 
 //const firebase = require("../firebase");
@@ -79,35 +85,6 @@ class App extends Component {
       }
     ];
 
-    let uw = [
-      {
-        title: "Spring Sale",
-        ownerId: "user1",
-        ownerUsername: "mike-smith",
-        widgetType: "Pop Up",
-        creationDate: "September 16, 2018",
-        status: "active"
-      },
-
-      {
-        title: "End of Season Sale",
-        ownerId: "user1",
-        ownerUsername: "mike-smith",
-        widgetType: "Banner",
-        creationDate: "September 20, 2018",
-        status: "active"
-      },
-
-      {
-        title: "2018 New Years Eve Sale: 50% Off",
-        ownerId: "user1",
-        ownerUsername: "mike-smith",
-        widgetType: "Pop Up",
-        creationDate: "December 20, 2017",
-        status: "not active"
-      }
-    ];
-
     let addUser = (firstName, lastName) => {
       let username = [firstName, lastName].join("-").toLowerCase();
       return db.collection("users").add({
@@ -126,29 +103,23 @@ class App extends Component {
         widgetCounter = doc.data().widgets;
       });
 
-    let addMultipleWidgets = widgets => {
-      return uw.map(singleWidget => {
-        db.collection("counters")
-          .doc("stats")
-          .set({ widgets: ++widgetCounter });
-        db.collection("widgets")
-          .doc("bcpa".concat(widgetCounter))
-          .set(singleWidget);
-      });
-    };
-
     return (
       <div className="App">
         <Header />
-        <div className="main">
-          <WidgetList
-            title="Alerts"
-            user={users.find(x => x.id == this.state.currentUser).name}
-            dataSource={this.state.widgets}
+        <Router>
+          <Route
+            path="/"
+            exact
+            render={props => (
+              <Home
+                {...props}
+                title="Alerts"
+                user={users.find(x => x.id == this.state.currentUser).name}
+                dataSource={this.state.widgets}
+              />
+            )}
           />
-          }
-        </div>
-        <Footer />
+        </Router>
       </div>
     );
   }

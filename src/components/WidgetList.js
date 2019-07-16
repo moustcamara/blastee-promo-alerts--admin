@@ -32,13 +32,8 @@ function WidgetList(props) {
 
   return (
     <React.Fragment>
-      <p>
-        <strong>User:</strong> {props.user}
-      </p>
-      <h3>{props.title}</h3>
-
       <Grid xs={12}>
-        <Grid container justify="center" spacing={spacing}>
+        <Grid container justify="center" spacing={4}>
           {props.dataSource.map((x, i) => (
             <WidgetListSingle
               key={x.id}

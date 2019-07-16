@@ -43,7 +43,7 @@ function WidgetListSingle(props) {
   };
 
   return (
-    <Grid key={props.key} item>
+    <Grid key={props.key} item xs={12} sm={6} md={4}>
       <Paper className={classes.paper}>
         <Box>
           <Icon fontSize="small">edit</Icon>

@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+
+import Link from "@material-ui/core/Link";
 
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+
+import HeaderNavLink from "./HeaderNavLink";
 
 import Typography from "@material-ui/core/Typography";
 
@@ -34,18 +40,21 @@ const useStyles = makeStyles(theme => ({
 
 let HeaderNav = props => {
   const classes = useStyles();
-  //const [v, setValue] = React.useState(0);
 
   return (
-    <nav className={classes.root}>
-      <AppBar position="static">
-        <Tabs>
-          <Tab label="My Widgets" />
-          <Tab label="All Widgets" />
-          <Tab label="Help" />
-          <Tab label="My Account" />
-        </Tabs>
-      </AppBar>
+    <nav
+      className={classes.root}
+      style={{
+        paddingTop: "20px",
+        paddingBottom: "15px",
+        display: "flex"
+      }}
+      align-content-xs-flex-end
+    >
+      <HeaderNavLink name="My Apps" link="/" icon="" />
+      <HeaderNavLink name="All Apps" link="/" icon="" />
+      <HeaderNavLink name="Help" link="/" icon="" />
+      <HeaderNavLink name="My Account" link="/" icon="" />
     </nav>
   );
 };
