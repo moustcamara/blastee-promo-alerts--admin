@@ -6,8 +6,8 @@ import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import Home from "./pages/home";
-import EditWidget from "./pages/edit-widget";
+import Home from "../pages/home";
+import EditWidget from "../pages/edit-widget";
 
 import { makeStyles } from "@material-ui/core/styles";
 

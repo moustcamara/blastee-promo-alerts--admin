@@ -6,7 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
-import WidgetList from "../components/WidgetList";
+import WidgetList from "../src/components/WidgetList";
 
 function Home(props) {
   return (
