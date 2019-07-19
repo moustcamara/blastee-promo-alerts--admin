@@ -49,7 +49,7 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let userWidgets = [];
 
     let getWidgets = db.collection("widgets");

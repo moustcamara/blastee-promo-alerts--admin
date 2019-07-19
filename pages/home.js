@@ -33,11 +33,7 @@ function Home(props) {
         >
           Alerts
         </Typography>
-        <WidgetList
-          title={props.title}
-          user={props.user}
-          dataSource={props.dataSource}
-        />
+        <WidgetList user={props.user} dataSource={props.dataSource} />
       </Container>
     </div>
   );

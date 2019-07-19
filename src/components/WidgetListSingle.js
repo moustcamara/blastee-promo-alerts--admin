@@ -43,7 +43,7 @@ function WidgetListSingle(props) {
   };
 
   return (
-    <Grid key={props.key} item xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={6} md={4}>
       <Paper className={classes.paper}>
         <Box>
           <Icon fontSize="small">edit</Icon>
@@ -61,9 +61,7 @@ function WidgetListSingle(props) {
           />
         </Box>
         <Breadcrumbs aria-label="Breadcrumb">
-          <Typography size="small" color="pink">
-            {props.widgetType}
-          </Typography>
+          <Typography size="small">{props.widgetType}</Typography>
           <Typography size="small" color="textPrimary">
             {props.creationDate}
           </Typography>
