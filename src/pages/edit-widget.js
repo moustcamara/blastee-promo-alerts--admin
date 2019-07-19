@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import WidgetList from "../src/components/WidgetList";
+import WidgetList from "../components/WidgetList";
 
 import { makeStyles } from "@material-ui/core/styles";
 
