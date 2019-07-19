@@ -35,14 +35,7 @@ function WidgetList(props) {
     <React.Fragment>
       <Grid xs={12}>
         <Grid container spacing={4}>
-          {[
-            {
-              title: "Pizza is awesome",
-              status: "active",
-              widgetType: "Popup",
-              creationDate: "August 3, 2019"
-            }
-          ].map((x, i) => (
+          {props.dataSource.map((x, i) => (
             <WidgetListSingle
               key={"item_" + i}
               title={x.title}
