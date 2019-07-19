@@ -18,7 +18,7 @@ function WidgetList(props) {
   const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
-  let handleDelete = widgetId => {
+  /* let handleDelete = widgetId => {
     return db
       .collection("widgets")
       .doc(widgetId)
@@ -29,7 +29,7 @@ function WidgetList(props) {
       .catch(function(error) {
         alert("Error deleting widget: ", error);
       });
-  };
+  }; */
 
   return (
     <React.Fragment>
