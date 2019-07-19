@@ -1,4 +1,5 @@
 import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -33,7 +34,7 @@ function WidgetList(props) {
   return (
     <React.Fragment>
       <Grid xs={12}>
-        <Grid container justify="center" spacing={4}>
+        <Grid container spacing={4}>
           {[
             {
               title: "Pizza is awesome",
