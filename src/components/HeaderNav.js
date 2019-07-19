@@ -47,9 +47,9 @@ let HeaderNav = props => {
       style={{
         paddingTop: "20px",
         paddingBottom: "15px",
-        display: "flex"
+        display: "flex",
+        justifyContent: "flex-end"
       }}
-      align-content-xs-flex-end
     >
       <HeaderNavLink name="My Apps" link="/" icon="" />
       <HeaderNavLink name="All Apps" link="/" icon="" />

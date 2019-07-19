@@ -11,16 +11,7 @@ import Link from "@material-ui/core/Link";
 
 const HeaderNavLink = props => {
   return (
-    <Link
-      href="/"
-      color="textPrimary"
-      underline="none"
-      style={{
-        paddingLeft: 20,
-        paddingRight: 20,
-        textTransform: "uppercase"
-      }}
-    >
+    <Link href="/" class="header-navigation__link">
       {props.name}
       {props.icon && <Icon>{props.icon}</Icon>}
     </Link>

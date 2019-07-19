@@ -11,6 +11,21 @@ img {
   color: #61dafb;
 }
 
+.header-navigation__link {
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.header-navigation__link:last-child {
+  padding-right: 0;
+}
+
+.header-navigation__link:hover {
+  color: #666;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
