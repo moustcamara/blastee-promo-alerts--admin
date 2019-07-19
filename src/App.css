@@ -1,3 +1,7 @@
+body {
+  background-color: #e8eaf1;
+}
+
 img {
   max-width: 100%;
 }
@@ -9,6 +13,10 @@ img {
 
 .App-link {
   color: #61dafb;
+}
+
+header {
+  background-color: #fff;
 }
 
 .header-navigation__link {

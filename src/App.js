@@ -119,6 +119,11 @@ class App extends Component {
               />
             )}
           />
+          <Route
+            path="/edit-widget"
+            exact
+            render={props => <EditWidget {...props} />}
+          />
         </Router>
       </div>
     );

@@ -12,24 +12,26 @@ import Paper from "@material-ui/core/Paper";
 
 const Header = props => {
   return (
-    <Container
-      maxWidth="lg"
-      style={{
-        paddingLeft: 30,
-        paddlingRight: 30,
-        paddingTop: 15,
-        paddingBottom: 15
-      }}
-    >
-      <Grid container spacing={2}>
-        <Grid item md={6}>
-          <Logo />
+    <header>
+      <Container
+        maxWidth="lg"
+        style={{
+          paddingLeft: 30,
+          paddlingRight: 30,
+          paddingTop: 15,
+          paddingBottom: 15
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item md={6}>
+            <Logo />
+          </Grid>
+          <Grid item md={6} justify="center">
+            <HeaderNav />
+          </Grid>
         </Grid>
-        <Grid item md={6} justify="center">
-          <HeaderNav />
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </header>
   );
 };
 

@@ -10,13 +10,7 @@ import WidgetList from "../components/WidgetList";
 
 function Home(props) {
   return (
-    <div
-      className="main"
-      style={{
-        backgroundColor: "#E8EAF1",
-        minHeight: "80vh"
-      }}
-    >
+    <div className="main">
       <Container
         maxWidth="lg"
         style={{
