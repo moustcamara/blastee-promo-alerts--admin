@@ -42,3 +42,9 @@ header {
     transform: rotate(360deg);
   }
 }
+
+.btn-no-style {
+  cursor: pointer;
+  background: none;
+  border: none;
+}

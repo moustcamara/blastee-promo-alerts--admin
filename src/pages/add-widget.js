@@ -11,7 +11,7 @@ import Box from "@material-ui/core/Box";
 
 import * as firebase from "firebase";
 
-function EditWidget(props) {
+function AddWidget(props) {
   return (
     <div className="main">
       <Container
@@ -28,7 +28,7 @@ function EditWidget(props) {
             marginBottom: 30
           }}
         >
-          Edit Widget: {props.widgetId}
+          Add New Widget
         </Typography>
         <SingleWidget />
       </Container>
@@ -36,4 +36,4 @@ function EditWidget(props) {
   );
 }
 
-export default EditWidget;
+export default AddWidget;

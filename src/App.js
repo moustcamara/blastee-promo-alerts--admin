@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  Switch as RouteSwitch,
+  Route,
+  BrowserRouter as Router,
+  withRouter
+} from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
 
 import "./App.css";
 
@@ -8,6 +14,7 @@ import Footer from "./components/Footer";
 
 import Home from "./pages/home";
 import EditWidget from "./pages/edit-widget";
+import AddWidget from "./pages/add-widget";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -45,11 +52,21 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: "user1",
+      page: "home",
       widgets: []
     };
   }
 
   componentWillMount() {
+    if (window.location.href.indexOf("edit-widget") > -1) {
+      let urlParams = new URLSearchParams(window.location.search);
+
+      this.setState({
+        page: "edit-widget",
+        currentWidget: urlParams.get("id")
+      });
+    }
+
     let userWidgets = [];
 
     let getWidgets = db.collection("widgets");
@@ -62,7 +79,7 @@ class App extends Component {
           return;
         }
         snapshot.forEach(doc => {
-          userWidgets.push(doc.data());
+          userWidgets.push({ ...doc.data(), id: doc.id });
         });
 
         this.setState({
@@ -106,24 +123,31 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Router>
-          <Route
-            path="/"
-            exact
-            render={props => (
-              <Home
-                {...props}
-                title="Alerts"
-                user={users.find(x => x.id == this.state.currentUser).name}
-                dataSource={this.state.widgets}
-              />
-            )}
-          />
-          <Route
-            path="/edit-widget"
-            exact
-            render={props => <EditWidget {...props} />}
-          />
+        <Router history={history}>
+          <RouteSwitch>
+            <Route
+              path="/"
+              exact
+              render={props => (
+                <Home
+                  {...props}
+                  title="Alerts"
+                  user={users.find(x => x.id == this.state.currentUser).name}
+                  dataSource={this.state.widgets}
+                />
+              )}
+            />
+            <Route
+              path="/edit-widget"
+              render={props => (
+                <EditWidget {...props} widgetId={this.state.currentWidget} />
+              )}
+            />
+            <Route
+              path="/add-widget"
+              render={props => <AddWidget {...props} />}
+            />
+          </RouteSwitch>
         </Router>
       </div>
     );

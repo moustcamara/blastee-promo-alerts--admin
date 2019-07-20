@@ -37,7 +37,8 @@ function WidgetList(props) {
         <Grid container spacing={4}>
           {props.dataSource.map((x, i) => (
             <WidgetListSingle
-              key={"item_" + i}
+              key={x.id}
+              id={x.id}
               title={x.title}
               status={x.status}
               widgetType={x.widgetType}

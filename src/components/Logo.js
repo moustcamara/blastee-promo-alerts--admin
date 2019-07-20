@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Link from "@material-ui/core/Link";
+
 import logo from "../images/blastee-commerce-logo.png";
 
 const Logo = props => {
@@ -11,7 +13,9 @@ const Logo = props => {
         paddingBottom: "10px"
       }}
     >
-      <img src={logo} alt="Blastee Commerce" />
+      <Link href="/">
+        <img src={logo} alt="Blastee Commerce" />
+      </Link>
     </div>
   );
 };
