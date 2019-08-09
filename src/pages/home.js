@@ -26,16 +26,20 @@ function Home(props) {
             marginBottom: "30px"
           }}
         >
-          <Grid item md={9}>
+          <Grid item md={9} sm={9}>
             <Typography variant="h4" component="h4">
               Alerts
             </Typography>
           </Grid>
-          <Grid item md={3}>
-            <WidgetListActions />
+          <Grid item md={3} sm={3}>
+            <WidgetListActions actions={props.actions} />
           </Grid>
         </Grid>
-        <WidgetList user={props.user} dataSource={props.dataSource} />
+        <WidgetList
+          user={props.user}
+          actions={props.actions}
+          dataSource={props.dataSource}
+        />
       </Container>
     </div>
   );

@@ -1,5 +1,6 @@
 body {
   background-color: #e8eaf1;
+  font-family: museo-sans, sans-serif;
 }
 
 img {
@@ -43,8 +44,33 @@ header {
   }
 }
 
+.btn {
+  text-decoration: none;
+}
+
 .btn-no-style {
   cursor: pointer;
   background: none;
   border: none;
+}
+
+.btn-edit,
+.btn-delete {
+  color: #666;
+}
+
+.btn-delete:hover {
+  color: #f44336;
+}
+
+.tab-bar {
+  background-color: #fff;
+}
+
+.tab-bar__link span {
+  color: #000;
+}
+
+.tab-container {
+  background-color: #fff;
 }

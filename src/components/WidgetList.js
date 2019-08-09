@@ -43,6 +43,7 @@ function WidgetList(props) {
               status={x.status}
               widgetType={x.widgetType}
               creationDate={x.creationDate}
+              actions={props.actions}
             />
           ))}
         </Grid>

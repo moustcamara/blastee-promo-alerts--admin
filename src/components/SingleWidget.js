@@ -1,5 +1,10 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  fade,
+  withStyles,
+  makeStyles,
+  createMuiTheme
+} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
@@ -21,9 +26,38 @@ import Icon from "@material-ui/core/Icon";
 
 import clsx from "clsx";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import { ThemeProvider } from "@material-ui/styles";
+import InputBase from "@material-ui/core/InputBase";
+import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
 
 function SingleWidget(props) {
+  const [values, setValues] = React.useState({
+    name: "Cat in the Hat",
+    age: "",
+    multiline: "Controlled",
+    currency: "EUR"
+  });
+
+  const inputStyles = makeStyles(theme => ({
+    container: {
+      display: "flex",
+      flexWrap: "wrap"
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1)
+    },
+    dense: {
+      marginTop: theme.spacing(2)
+    },
+    menu: {
+      width: 200
+    }
+  }));
+
   const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1
@@ -37,6 +71,43 @@ function SingleWidget(props) {
       padding: theme.spacing(2)
     }
   }));
+
+  const BootstrapInput = withStyles(theme => ({
+    root: {
+      "label + &": {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        width: "100%"
+      }
+    },
+    input: {
+      borderRadius: 0,
+      position: "relative",
+      backgroundColor: theme.palette.common.white,
+      border: "1px solid #ced4da",
+      fontSize: 16,
+      width: "auto",
+      padding: "10px 12px",
+      transition: theme.transitions.create(["border-color", "box-shadow"]),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"'
+      ].join(","),
+      "&:focus": {
+        boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+        borderColor: theme.palette.primary.main
+      }
+    }
+  }))(InputBase);
 
   function TabContainer(props) {
     return (
@@ -57,17 +128,44 @@ function SingleWidget(props) {
     <React.Fragment>
       <Grid item xs={12} sm={12} md={12}>
         <AppBar position="static">
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Appearance" />
-            <Tab label="Content" />
-            <Tab label="Behavior" />
-            <Tab label="Targeting" />
+          <Tabs className="tab-bar" value={value} onChange={handleChange}>
+            {Object.entries(props.data)
+              .filter(x => typeof x[1] == "object")
+              .map((x, i) => (
+                <Tab key={"_" + x[0]} className="tab-bar__link" label={x[0]} />
+              ))}
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer>Appearance</TabContainer>}
-        {value === 1 && <TabContainer>Content</TabContainer>}
-        {value === 2 && <TabContainer>Behavior</TabContainer>}
-        {value === 3 && <TabContainer>Targeting</TabContainer>}
+
+        {Object.entries(props.data)
+          .filter(x => typeof x[1] == "object")
+          .map(
+            (x, i) =>
+              value === i && (
+                <TabContainer className="tab-container">
+                  <h4>{x[0]}</h4>
+                  <div>
+                    {Object.entries(x[1]).map((c, idx) => (
+                      <Box>
+                        <FormControl className={classes.margin}>
+                          <InputLabel shrink htmlFor="bootstrap-input">
+                            {c[0]}
+                          </InputLabel>
+                          <BootstrapInput
+                            defaultValue={
+                              typeof c[1]["value"] != "undefined"
+                                ? c[1]["value"]
+                                : c[1]
+                            }
+                            id={"outlined-name-" + idx}
+                          />
+                        </FormControl>
+                      </Box>
+                    ))}
+                  </div>
+                </TabContainer>
+              )
+          )}
       </Grid>
     </React.Fragment>
   );

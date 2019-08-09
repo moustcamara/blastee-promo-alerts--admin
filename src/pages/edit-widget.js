@@ -21,16 +21,7 @@ function EditWidget(props) {
           paddingBottom: 40
         }}
       >
-        <Typography
-          variant="h4"
-          component="h4"
-          style={{
-            marginBottom: 30
-          }}
-        >
-          Edit Widget: {props.widgetId}
-        </Typography>
-        <SingleWidget />
+        <SingleWidget data={props.data} widgetId={props.widgetId} />
       </Container>
     </div>
   );

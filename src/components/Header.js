@@ -23,10 +23,10 @@ const Header = props => {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item md={6} sm={4}>
             <Logo />
           </Grid>
-          <Grid item md={6} justify="center">
+          <Grid item md={6} sm={8} justify="center">
             <HeaderNav />
           </Grid>
         </Grid>
