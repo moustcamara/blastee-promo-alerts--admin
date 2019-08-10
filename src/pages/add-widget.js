@@ -11,7 +11,7 @@ import Box from "@material-ui/core/Box";
 
 import * as firebase from "firebase";
 
-function AddWidget(props) {
+function AddWidgetPage(props) {
   return (
     <div className="main">
       <Container
@@ -36,4 +36,4 @@ function AddWidget(props) {
   );
 }
 
-export default AddWidget;
+export default AddWidgetPage;

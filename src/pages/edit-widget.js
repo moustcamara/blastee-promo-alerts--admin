@@ -21,7 +21,11 @@ function EditWidget(props) {
           paddingBottom: 40
         }}
       >
-        <SingleWidget data={props.data} widgetId={props.widgetId} />
+        <SingleWidget
+          data={props.data}
+          widgetId={props.widgetId}
+          actions={props.actions}
+        />
       </Container>
     </div>
   );

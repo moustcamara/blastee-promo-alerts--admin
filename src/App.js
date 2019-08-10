@@ -64,7 +64,9 @@ class App extends Component {
 
     this.editWidget = this.editWidget.bind(this);
     this.addWidget = this.addWidget.bind(this);
+    this.saveWidget = this.saveWidget.bind(this);
     this.editField = this.editField.bind(this);
+    this.addToUpdateQueue = this.addToUpdateQueue.bind(this);
   }
 
   editWidget = id => {
@@ -96,6 +98,20 @@ class App extends Component {
       });
   };
 
+  addToUpdateQueue = (category, item) => {
+    let widgetData = this.state.currentWidgetData;
+    console.log(category);
+    //widgetData[category][item] = "Goober";
+  };
+
+  saveWidget = () => {
+    let widgetData = this.state.currentWidgetData;
+    this.setState({
+      currentWidgetData: widgetData
+    });
+    console.log(widgetData);
+  };
+
   addWidget = () => {
     this.setState({
       page: "add-widget"
@@ -103,6 +119,7 @@ class App extends Component {
   };
 
   editField = e => {
+    console.log("Pizza is amazing");
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -224,7 +241,10 @@ class App extends Component {
                 data={this.state.currentWidgetData}
                 widgetId={this.state.currentWidget}
                 actions={{
-                  editField: this.editField
+                  editWidget: this.editWidget,
+                  addWidget: this.addWidget,
+                  saveWidget: this.saveWidget,
+                  addToUpdateQueue: this.addToUpdateQueue
                 }}
               />
             )}
@@ -235,7 +255,10 @@ class App extends Component {
               <AddWidget
                 {...props}
                 actions={{
-                  editField: this.editField
+                  editWidget: this.editWidget,
+                  addWidget: this.addWidget,
+                  saveWidget: this.saveWidget,
+                  addToUpdateQueue: this.addToUpdateQueue
                 }}
               />
             )}

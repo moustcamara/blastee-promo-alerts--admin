@@ -33,6 +33,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 
+import MUIRichTextEditor from "mui-rte";
+
+import Button from "@material-ui/core/Button";
+
 function SingleWidget(props) {
   const [values, setValues] = React.useState({
     name: "Cat in the Hat",
@@ -76,8 +80,7 @@ function SingleWidget(props) {
     root: {
       "label + &": {
         marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        width: "100%"
+        marginBottom: theme.spacing(3)
       }
     },
     input: {
@@ -86,7 +89,7 @@ function SingleWidget(props) {
       backgroundColor: theme.palette.common.white,
       border: "1px solid #ced4da",
       fontSize: 16,
-      width: "auto",
+      lineHeight: "100%",
       padding: "10px 12px",
       transition: theme.transitions.create(["border-color", "box-shadow"]),
       // Use the system font instead of the default Roboto font.
@@ -111,7 +114,7 @@ function SingleWidget(props) {
 
   function TabContainer(props) {
     return (
-      <Typography component="div" style={{ padding: 8 * 3 }}>
+      <Typography component="div" className="tab-container">
         {props.children}
       </Typography>
     );
@@ -142,26 +145,65 @@ function SingleWidget(props) {
           .map(
             (x, i) =>
               value === i && (
-                <TabContainer className="tab-container">
-                  <h4>{x[0]}</h4>
-                  <div>
-                    {Object.entries(x[1]).map((c, idx) => (
-                      <Box>
-                        <FormControl className={classes.margin}>
-                          <InputLabel shrink htmlFor="bootstrap-input">
-                            {c[0]}
-                          </InputLabel>
-                          <BootstrapInput
-                            defaultValue={
-                              typeof c[1]["value"] != "undefined"
-                                ? c[1]["value"]
-                                : c[1]
-                            }
-                            id={"outlined-name-" + idx}
-                          />
-                        </FormControl>
-                      </Box>
-                    ))}
+                <TabContainer>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <h4 className="tab-container__title">{x[0]}</h4>
+                    <div className="tab-container__main">
+                      {Object.entries(x[1]).map((c, idx) => (
+                        <Box className="tab-container__form-holder">
+                          {c[1]["type"] === "input" && (
+                            <FormControl className={classes.margin}>
+                              <InputLabel shrink htmlFor="bootstrap-input">
+                                {c[0]}
+                              </InputLabel>
+                              <BootstrapInput
+                                onChange={() =>
+                                  props.actions.addToUpdateQueue(x[1], c[1])
+                                }
+                                defaultValue={
+                                  typeof c[1]["value"] != "undefined"
+                                    ? c[1]["value"]
+                                    : c[1]
+                                }
+                                id={"outlined-name-" + idx}
+                              />
+                            </FormControl>
+                          )}
+                          {c[1]["type"] === "textarea" && (
+                            <FormControl className={classes.margin}>
+                              <InputLabel shrink htmlFor="bootstrap-input">
+                                {c[0]}
+                              </InputLabel>
+                              <BootstrapInput
+                                fullWidth
+                                defaultValue={
+                                  typeof c[1]["value"] != "undefined"
+                                    ? c[1]["value"]
+                                    : c[1]
+                                }
+                                multiline={true}
+                                rows="6"
+                                id={"outlined-name-" + idx}
+                              />
+                            </FormControl>
+                          )}
+                        </Box>
+                      ))}
+                    </div>
+                  </Grid>
+                  <div className="single-widget__footer">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      style={{ marginRight: "15px" }}
+                      onClick={() => props.actions.saveWidget()}
+                    >
+                      Save
+                    </Button>
+                    <Button variant="contained" className={classes.button}>
+                      Cancel
+                    </Button>
                   </div>
                 </TabContainer>
               )
