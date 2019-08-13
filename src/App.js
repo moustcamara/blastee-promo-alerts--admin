@@ -65,9 +65,18 @@ class App extends Component {
     this.editWidget = this.editWidget.bind(this);
     this.addWidget = this.addWidget.bind(this);
     this.saveWidget = this.saveWidget.bind(this);
+    this.cancelWidgetChanges = this.cancelWidgetChanges.bind(this);
     this.editField = this.editField.bind(this);
     this.addToUpdateQueue = this.addToUpdateQueue.bind(this);
   }
+
+  cancelWidgetChanges = e => {
+    console.log("Changes canceled.");
+    let widgetData = this.state.currentWidgetData;
+    this.setState({
+      currentWidgetData: widgetData
+    });
+  };
 
   editWidget = id => {
     this.setState({
@@ -244,6 +253,8 @@ class App extends Component {
                   editWidget: this.editWidget,
                   addWidget: this.addWidget,
                   saveWidget: this.saveWidget,
+                  addToUpdateQueue: this.addToUpdateQueue,
+                  cancelWidgetChanges: this.cancelWidgetChanges
                   addToUpdateQueue: this.addToUpdateQueue
                 }}
               />
@@ -258,6 +269,8 @@ class App extends Component {
                   editWidget: this.editWidget,
                   addWidget: this.addWidget,
                   saveWidget: this.saveWidget,
+                  addToUpdateQueue: this.addToUpdateQueue,
+                  cancelWidgetChanges: this.cancelWidgetChanges,
                   addToUpdateQueue: this.addToUpdateQueue
                 }}
               />

@@ -1,5 +1,11 @@
 import React from "react";
 import {
+  Route,
+  BrowserRouter as Router,
+  withRouter,
+  Link as PageLink
+} from "react-router-dom";
+import {
   fade,
   withStyles,
   makeStyles,
@@ -33,7 +39,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 
-import MUIRichTextEditor from "mui-rte";
 
 import Button from "@material-ui/core/Button";
 
@@ -201,6 +206,13 @@ function SingleWidget(props) {
                     >
                       Save
                     </Button>
+                    <Button
+                      to="/"
+                      component={PageLink}
+                      variant="contained"
+                      className={classes.button}
+                      onClick={() => props.actions.cancelWidgetChanges("test")}
+                    >
                     <Button variant="contained" className={classes.button}>
                       Cancel
                     </Button>
