@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import Link from "@material-ui/core/Link";
+import {
+  Route,
+  BrowserRouter as Router,
+  withRouter,
+  Link as PageLink
+} from "react-router-dom";
 
 import logo from "../images/blastee-commerce-logo.png";
 
@@ -13,9 +19,9 @@ const Logo = props => {
         paddingBottom: "10px"
       }}
     >
-      <Link href="/">
+      <PageLink to="/">
         <img src={logo} alt="Blastee Commerce" />
-      </Link>
+      </PageLink>
     </div>
   );
 };

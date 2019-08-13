@@ -1,5 +1,6 @@
 body {
   background-color: #e8eaf1;
+  font-family: museo-sans, sans-serif;
 }
 
 img {
@@ -43,8 +44,55 @@ header {
   }
 }
 
+.btn {
+  text-decoration: none;
+}
+
 .btn-no-style {
   cursor: pointer;
   background: none;
   border: none;
+}
+
+.btn-edit,
+.btn-delete {
+  color: #666;
+}
+
+.btn-delete:hover {
+  color: #f44336;
+}
+
+.tab-bar {
+  background-color: #fff;
+}
+
+.tab-bar__link span {
+  color: #000;
+}
+
+.tab-container {
+  padding: 35px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15);
+}
+
+.tab-container__main {
+  min-height: 50vh;
+}
+
+.tab-container__title {
+  margin-top: 0px;
+}
+
+.tab-container__form-holder > div {
+  width: 100%;
+}
+
+.single-widget__footer {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #ced4da;
+  display: flex;
+  justify-content: center;
 }

@@ -1,6 +1,12 @@
 import React from "react";
+import App from "../App";
 import history from "../history";
-import { Route, BrowserRouter as Router, withRouter } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  withRouter,
+  Link as PageLink
+} from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
 
 import EditWidget from "../pages/edit-widget";
@@ -49,24 +55,15 @@ function WidgetListSingle(props) {
     setState({ ...state, [name]: event.target.checked });
   };
 
-  const editWidget = id => {
-    // setState({ ...state, currentWidget: id });
-    let pg = "/edit-widget?id=" + id;
-    let goTo = (() =>
-      history.push({
-        pathname: pg
-      }))();
-  };
-
   const deleteWidget = id => {
     alert("Are you sure you'd like to delete widget " + id + "?");
   };
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={6} md={6}>
       <Paper className={classes.paper}>
         <Grid container spacing={4}>
-          <Grid item xs={9} sm={9} md={9}>
+          <Grid item xs={10} sm={10} md={10}>
             <Box
               fontSize="h6.fontSize"
               fontWeight={500}
@@ -88,9 +85,9 @@ function WidgetListSingle(props) {
 
           <Grid
             item
-            xs={3}
-            sm={3}
-            md={3}
+            xs={2}
+            sm={2}
+            md={2}
             style={{
               textAlign: "center"
             }}
@@ -104,15 +101,18 @@ function WidgetListSingle(props) {
               />
             </Box>
             <Box>
-              <Link
-                onClick={() => editWidget(props.id)}
+              <Icon
+                fontSize="medium"
+                component={PageLink}
+                to={"/edit-widget?id=" + props.id}
+                onClick={() => props.actions.editWidget(props.id)}
                 className="btn btn-edit btn-no-style"
                 style={{
                   marginTop: "10px"
                 }}
               >
-                <Icon fontSize="medium">edit</Icon>
-              </Link>
+                edit
+              </Icon>
             </Box>
             <Box>
               <button
