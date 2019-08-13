@@ -255,6 +255,7 @@ class App extends Component {
                   saveWidget: this.saveWidget,
                   addToUpdateQueue: this.addToUpdateQueue,
                   cancelWidgetChanges: this.cancelWidgetChanges
+                  addToUpdateQueue: this.addToUpdateQueue
                 }}
               />
             )}
@@ -269,7 +270,8 @@ class App extends Component {
                   addWidget: this.addWidget,
                   saveWidget: this.saveWidget,
                   addToUpdateQueue: this.addToUpdateQueue,
-                  cancelWidgetChanges: this.cancelWidgetChanges
+                  cancelWidgetChanges: this.cancelWidgetChanges,
+                  addToUpdateQueue: this.addToUpdateQueue
                 }}
               />
             )}

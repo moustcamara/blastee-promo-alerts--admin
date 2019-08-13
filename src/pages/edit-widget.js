@@ -25,6 +25,8 @@ function EditWidget(props) {
           data={props.data}
           actions={props.actions}
           widgetId={props.widgetId}
+          widgetId={props.widgetId}
+          actions={props.actions}
         />
       </Container>
     </div>
