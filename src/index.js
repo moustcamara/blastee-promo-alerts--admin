@@ -5,7 +5,7 @@ import {
   Redirect,
   Route,
   BrowserRouter,
-  withRouter
+  withRouter 
 } from "react-router-dom";
 import "./index.css";
 import App from "./App";

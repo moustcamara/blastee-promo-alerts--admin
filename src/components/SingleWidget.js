@@ -41,6 +41,8 @@ import FormControl from "@material-ui/core/FormControl";
 
 import Button from "@material-ui/core/Button";
 
+import ColorPicker from "material-ui-color-picker";
+
 function SingleWidget(props) {
   const [values, setValues] = React.useState({
     name: "Cat in the Hat",
@@ -127,6 +129,9 @@ function SingleWidget(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  let toLabel = e => e.replace(/\s/g, "-").toLowerCase();
+  let toHyphenated = e => e.replace(/\s/g, "-");
+
   function handleChange(event, newValue) {
     setValue(newValue);
   }
@@ -144,6 +149,13 @@ function SingleWidget(props) {
           </Tabs>
         </AppBar>
 
+        <ColorPicker
+          name="color"
+          defaultValue="#000"
+          // value={this.state.color} - for controlled component
+          onChange={color => console.log(color)}
+        />
+
         {Object.entries(props.data)
           .filter(x => typeof x[1] == "object")
           .map(
@@ -157,19 +169,20 @@ function SingleWidget(props) {
                         <Box className="tab-container__form-holder">
                           {c[1]["type"] === "input" && (
                             <FormControl className={classes.margin}>
-                              <InputLabel shrink htmlFor="bootstrap-input">
+                              <InputLabel shrink htmlFor={x[0] + "__" + c[0]}>
                                 {c[0]}
                               </InputLabel>
+                              <input
+                                type="text"
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                              />
                               <BootstrapInput
-                                onChange={() =>
-                                  props.actions.addToUpdateQueue(x[1], c[1])
-                                }
-                                defaultValue={
-                                  typeof c[1]["value"] != "undefined"
-                                    ? c[1]["value"]
-                                    : c[1]
-                                }
-                                id={"outlined-name-" + idx}
+                                key={["recipient", idx].join("_")}
+                                id={toHyphenated(x[0] + "__" + c[0])}
+                                name={toLabel(x[0] + "__" + c[0])}
+                                defaultValue={props.parentData.testField}
+                                onChange={props.actions.editField}
                               />
                             </FormControl>
                           )}
@@ -180,11 +193,7 @@ function SingleWidget(props) {
                               </InputLabel>
                               <BootstrapInput
                                 fullWidth
-                                defaultValue={
-                                  typeof c[1]["value"] != "undefined"
-                                    ? c[1]["value"]
-                                    : c[1]
-                                }
+                                defaultValue={props.data[x[0]][c[0]].value}
                                 multiline={true}
                                 rows="6"
                                 id={"outlined-name-" + idx}

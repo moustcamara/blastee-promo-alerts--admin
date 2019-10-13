@@ -55,6 +55,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      testField: "Gorilla",
       currentUser: "user1",
       page: "home",
       widgets: [],
@@ -68,13 +69,14 @@ class App extends Component {
     this.cancelWidgetChanges = this.cancelWidgetChanges.bind(this);
     this.editField = this.editField.bind(this);
     this.addToUpdateQueue = this.addToUpdateQueue.bind(this);
+
+    this.widgetData = this.state.currentWidgetData;
   }
 
   cancelWidgetChanges = e => {
     console.log("Changes canceled.");
-    let widgetData = this.state.currentWidgetData;
     this.setState({
-      currentWidgetData: widgetData
+      currentWidgetData: this.widgetData
     });
   };
 
@@ -84,7 +86,7 @@ class App extends Component {
       currentWidget: id
     });
 
-    let widgetData;
+    //let widgetData;
     let getData = db.collection("widgets").doc(id);
 
     let widgetDataQuery = getData
@@ -94,12 +96,12 @@ class App extends Component {
           console.log("No matching data.");
           return;
         } else {
-          widgetData = snapshot.data();
-          console.log(widgetData.content);
+          this.widgetData = snapshot.data();
+          console.log(this.widgetData.content);
         }
 
         this.setState({
-          currentWidgetData: widgetData
+          currentWidgetData: this.widgetData
         });
       })
       .catch(err => {
@@ -107,18 +109,29 @@ class App extends Component {
       });
   };
 
+  editField = event => {
+    this.setState({
+      testField: event.target.value
+    });
+  };
+
   addToUpdateQueue = (category, item) => {
-    let widgetData = this.state.currentWidgetData;
-    console.log(category);
-    //widgetData[category][item] = "Goober";
+    let toLabel = e => e.replace(/\s/g, "-").toLowerCase();
+    //let widgetData = this.state.currentWidgetData;
+
+    //let inputVal;
+
+    //this.widgetData[category][item].value = inputVal;
+    // this.state.currentWidgetData = this.widgetData;
+    console.log(this.widgetData);
   };
 
   saveWidget = () => {
-    let widgetData = this.state.currentWidgetData;
+    //let widgetData = this.state.currentWidgetData;
     this.setState({
-      currentWidgetData: widgetData
+      currentWidgetData: this.widgetData
     });
-    console.log(widgetData);
+    console.log(this.widgetData);
   };
 
   addWidget = () => {
@@ -127,12 +140,12 @@ class App extends Component {
     });
   };
 
-  editField = e => {
-    console.log("Pizza is amazing");
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
+  componentDidUpdate(prevProps, prevState) {
+    console.log(
+      `this.state.currentWidgetData(♻️ componentDidUpdate)`,
+      this.state.currentWidgetData
+    );
+  }
 
   componentWillMount() {
     if (window.location.href.indexOf("edit-widget") > -1) {
@@ -144,7 +157,7 @@ class App extends Component {
         currentWidget: id
       });
 
-      let widgetData = [];
+      this.widgetData = [];
       let getData = db.collection("widgets").doc(id);
 
       let widgetDataQuery = getData
@@ -154,13 +167,13 @@ class App extends Component {
             console.log("No matching data.");
             return;
           } else {
-            widgetData = snapshot.data();
+            this.widgetData = snapshot.data();
             console.log("Wassup!");
-            console.log(widgetData.content);
+            console.log(this.widgetData.content);
           }
 
           this.setState({
-            currentWidgetData: widgetData
+            currentWidgetData: this.widgetData
           });
           //return this.state.widgets;
         })
@@ -247,6 +260,7 @@ class App extends Component {
             render={props => (
               <EditWidget
                 {...props}
+                parentData={this.state}
                 data={this.state.currentWidgetData}
                 widgetId={this.state.currentWidget}
                 actions={{
@@ -254,6 +268,7 @@ class App extends Component {
                   addWidget: this.addWidget,
                   saveWidget: this.saveWidget,
                   addToUpdateQueue: this.addToUpdateQueue,
+                  editField: this.editField,
                   cancelWidgetChanges: this.cancelWidgetChanges
                 }}
               />
